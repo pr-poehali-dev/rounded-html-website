@@ -97,5 +97,24 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family:
+      "Open Sans",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
   }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap");
+
+.forum-card {
+  @apply bg-white rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300;
+}
+
+.forum-gradient {
+  background: linear-gradient(135deg, #2196f3 0%, #37474f 100%);
+}
+
+.hover-scale {
+  @apply transition-transform duration-200 hover:scale-105;
 }
