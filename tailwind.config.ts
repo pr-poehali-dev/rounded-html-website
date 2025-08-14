@@ -33,10 +33,13 @@ export default {
 					foreground: '#FFFFFF'
 				},
 				forum: {
-					blue: '#2196F3',
-					gray: '#37474F',
-					light: '#F5F5F5',
-					white: '#FFFFFF'
+					blue: '#3B82F6',
+					accent: '#8B5CF6', 
+					dark: '#0F172A',
+					darker: '#020617',
+					gray: '#1E293B',
+					light: '#334155',
+					muted: '#64748B'
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
