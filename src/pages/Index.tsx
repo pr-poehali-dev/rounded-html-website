@@ -14,6 +14,7 @@ const Index = () => {
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   const [newTopicTitle, setNewTopicTitle] = useState('');
   const [newTopicContent, setNewTopicContent] = useState('');
+  
   const forumSections = [
     {
       title: "Отзывы",
@@ -99,7 +100,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center space-x-4">
-              <h1 className="text-3xl font-bold">XENFORO FORUM</h1>
+              <h1 className="text-3xl font-bold text-white">XENFORO FORUM</h1>
               <Badge className="bg-white/20 text-white border-white/30">Онлайн: 247</Badge>
             </div>
             <div className="flex items-center space-x-3">
@@ -173,6 +174,7 @@ const Index = () => {
                 </div>
               </DialogContent>
             </Dialog>
+            
             <div className="flex-1 max-w-md ml-6">
               <div className="relative">
                 <Input 
@@ -189,107 +191,109 @@ const Index = () => {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 py-8 flex gap-8">
+        
         {/* Main Content */}
         <div className={`flex-1 transition-all duration-300 ${showAdminPanel ? 'mr-80' : ''}`}>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* Forum Sections */}
-          <div className="lg:col-span-2">
-            <h2 className="text-2xl font-semibold mb-6 text-slate-100">Разделы форума</h2>
-            <div className="grid gap-4">
-              {forumSections.map((section, index) => (
-                <Card key={index} className="forum-card p-6 hover-scale cursor-pointer">
-                  <div className="flex items-center space-x-4">
-                    <div className={`w-12 h-12 rounded-lg ${section.color} flex items-center justify-center`}>
-                      <Icon name={section.icon as any} size={24} className="text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-slate-100">{section.title}</h3>
-                      <p className="text-slate-400 mt-1">{section.description}</p>
-                      <div className="flex items-center space-x-4 mt-2 text-sm text-slate-500">
-                        <span>{section.posts} постов</span>
-                        <span>•</span>
-                        <span>Последний: {section.lastPost}</span>
+            
+            {/* Forum Sections */}
+            <div className="lg:col-span-2">
+              <h2 className="text-2xl font-semibold mb-6 text-slate-100">Разделы форума</h2>
+              <div className="grid gap-4">
+                {forumSections.map((section, index) => (
+                  <Card key={index} className="forum-card p-6 hover-scale cursor-pointer">
+                    <div className="flex items-center space-x-4">
+                      <div className={`w-12 h-12 rounded-lg ${section.color} flex items-center justify-center`}>
+                        <Icon name={section.icon as any} size={24} className="text-white" />
                       </div>
-                    </div>
-                    <Icon name="ChevronRight" size={20} className="text-slate-400" />
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Recent Posts Sidebar */}
-          <div>
-            <h2 className="text-2xl font-semibold mb-6 text-slate-100">Последние посты</h2>
-            <div className="space-y-4">
-              {recentPosts.map((post) => (
-                <Card key={post.id} className="forum-card p-4">
-                  <div className="flex items-start space-x-3">
-                    <div className="relative">
-                      <Avatar className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center font-medium">
-                        {post.avatar}
-                      </Avatar>
-                      {post.isOnline && (
-                        <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-slate-800"></div>
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-medium text-slate-100 truncate">{post.title}</h4>
-                      <p className="text-sm text-slate-400">by {post.author}</p>
-                      <div className="flex items-center space-x-3 mt-2 text-xs text-slate-500">
-                        <span>{post.time}</span>
-                        <span className="flex items-center">
-                          <Icon name="MessageCircle" size={12} className="mr-1" />
-                          {post.replies}
-                        </span>
-                        <span className="flex items-center">
-                          <Icon name="Star" size={12} className="mr-1 fill-yellow-400 text-yellow-400" />
-                          {post.rating}
-                        </span>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold text-slate-100">{section.title}</h3>
+                        <p className="text-slate-400 mt-1">{section.description}</p>
+                        <div className="flex items-center space-x-4 mt-2 text-sm text-slate-500">
+                          <span>{section.posts} постов</span>
+                          <span>•</span>
+                          <span>Последний: {section.lastPost}</span>
+                        </div>
                       </div>
-                      <Badge variant="outline" className="mt-2 text-xs border-slate-600 text-slate-300">
-                        {post.category}
-                      </Badge>
+                      <Icon name="ChevronRight" size={20} className="text-slate-400" />
                     </div>
-                  </div>
-                </Card>
-              ))}
-            </div>
-
-            {/* Online Users */}
-            <Card className="forum-card p-4 mt-6">
-              <h3 className="font-semibold text-slate-100 mb-3 flex items-center">
-                <Icon name="Users" size={16} className="mr-2" />
-                Сейчас на форуме
-              </h3>
-              <div className="space-y-2">
-                {userRoles.slice(0, 3).map((role, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-sm text-slate-300">{role.name}</span>
-                    <Badge variant="outline" className="text-xs ml-auto border-slate-600 text-slate-400">
-                      {role.users}
-                    </Badge>
-                  </div>
+                  </Card>
                 ))}
               </div>
-            </Card>
+            </div>
 
-            {/* Forum Stats */}
-            <Card className="forum-card p-4 mt-4">
-              <h3 className="font-semibold text-slate-100 mb-3">Статистика</h3>
-              <div className="grid grid-cols-2 gap-4 text-center">
-                <div>
-                  <div className="text-2xl font-bold text-blue-400">1,247</div>
-                  <div className="text-xs text-slate-500">Постов</div>
-                </div>
-                <div>
-                  <div className="text-2xl font-bold text-green-400">189</div>
-                  <div className="text-xs text-slate-500">Участников</div>
-                </div>
+            {/* Recent Posts Sidebar */}
+            <div>
+              <h2 className="text-2xl font-semibold mb-6 text-slate-100">Последние посты</h2>
+              <div className="space-y-4">
+                {recentPosts.map((post) => (
+                  <Card key={post.id} className="forum-card p-4">
+                    <div className="flex items-start space-x-3">
+                      <div className="relative">
+                        <Avatar className="w-10 h-10 bg-blue-600 text-white flex items-center justify-center font-medium">
+                          {post.avatar}
+                        </Avatar>
+                        {post.isOnline && (
+                          <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-slate-800"></div>
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-medium text-slate-100 truncate">{post.title}</h4>
+                        <p className="text-sm text-slate-400">by {post.author}</p>
+                        <div className="flex items-center space-x-3 mt-2 text-xs text-slate-500">
+                          <span>{post.time}</span>
+                          <span className="flex items-center">
+                            <Icon name="MessageCircle" size={12} className="mr-1" />
+                            {post.replies}
+                          </span>
+                          <span className="flex items-center">
+                            <Icon name="Star" size={12} className="mr-1 fill-yellow-400 text-yellow-400" />
+                            {post.rating}
+                          </span>
+                        </div>
+                        <Badge variant="outline" className="mt-2 text-xs border-slate-600 text-slate-300">
+                          {post.category}
+                        </Badge>
+                      </div>
+                    </div>
+                  </Card>
+                ))}
               </div>
-            </Card>
+
+              {/* Online Users */}
+              <Card className="forum-card p-4 mt-6">
+                <h3 className="font-semibold text-slate-100 mb-3 flex items-center">
+                  <Icon name="Users" size={16} className="mr-2" />
+                  Сейчас на форуме
+                </h3>
+                <div className="space-y-2">
+                  {userRoles.slice(0, 3).map((role, index) => (
+                    <div key={index} className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                      <span className="text-sm text-slate-300">{role.name}</span>
+                      <Badge variant="outline" className="text-xs ml-auto border-slate-600 text-slate-400">
+                        {role.users}
+                      </Badge>
+                    </div>
+                  ))}
+                </div>
+              </Card>
+
+              {/* Forum Stats */}
+              <Card className="forum-card p-4 mt-4">
+                <h3 className="font-semibold text-slate-100 mb-3">Статистика</h3>
+                <div className="grid grid-cols-2 gap-4 text-center">
+                  <div>
+                    <div className="text-2xl font-bold text-blue-400">1,247</div>
+                    <div className="text-xs text-slate-500">Постов</div>
+                  </div>
+                  <div>
+                    <div className="text-2xl font-bold text-green-400">189</div>
+                    <div className="text-xs text-slate-500">Участников</div>
+                  </div>
+                </div>
+              </Card>
+            </div>
           </div>
         </div>
 
